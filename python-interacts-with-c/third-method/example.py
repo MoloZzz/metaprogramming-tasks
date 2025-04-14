@@ -60,6 +60,11 @@ if __name__ == "__main__":
         [3, 6, 1],
         [2, 1, 5]
     ]
+    matrix2 = [
+    [1, 2, 3],
+    [2, 4, 6],
+    [7, 8, 9]
+    ]  # Singular matrix for testing
     
     print("Input matrix:")
     print(np.array(matrix))
@@ -72,3 +77,12 @@ if __name__ == "__main__":
         # Verify: A * A^-1 should be identity
         print("\nVerification (A * A^-1):")
         print(np.dot(np.array(matrix), inverse))
+    
+    print("Input matrix(singular):")
+    print(np.array(matrix2))
+    inverse = inverse_matrix_python(matrix2) # Singular case
+    if inverse is not None:
+        print("\nInverse matrix:")
+        print(inverse)
+        print("\nVerification (A * A^-1):")
+        print(np.dot(np.array(matrix2), inverse))
