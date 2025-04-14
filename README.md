@@ -94,13 +94,15 @@ copying build\lib.win-amd64-cpython-311\wordfreq.cp311-win_amd64.pyd ->
 ```
 ```
 $ python example.py
-Input text: This is a sample text. This text contains some words.
+Input text:
+This is a sample text. This text contains some words.
 Some words are repeated in this sample text!
 Top 3 frequent words: {'text': 3, 'this': 3, 'sample': 2}
 ```
 ```
 $ python example.py
-Input text: This is a sample text. This text contains some words.
+Input text:
+This is a sample text. This text contains some words.
 Some words are repeated in this sample text!
 Some more text to test the word frequency.
 This is a test text to check the word frequency.
