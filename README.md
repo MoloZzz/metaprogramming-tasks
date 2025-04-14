@@ -58,7 +58,7 @@ Longest increasing subsequence: [10, 22, 33, 50, 60, 80]
 ## second-method
 Функція на С: на вхід – текст та число N, на вихід – словник (dict) з N найбільш вживаних слів у ньому разом з їх кількістю.
 Зв'язок через Cython
-
+```
 second-method/
 │
 ├── word_counter.c           ← C-файл з логікою (можна згенерувати окремо)
@@ -67,7 +67,7 @@ second-method/
 ├── word_counter.pyx         ← Python/Cython-файл, який викликає функції C
 ├── setup.py                 ← Скрипт для компіляції Cython
 └── test_script.py           ← Python-скрипт для запуску та перевірки
-
+```
 ```
 $ python setup.py build_ext --inplace
 Compiling wordfreq.pyx because it changed.
