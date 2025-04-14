@@ -9,5 +9,5 @@ This is a test text to check the word frequency.
 """
 n = 10
 result = wordfreq.get_frequent_words(text, n)
-print(f"Input text: {text.strip()}")
+print(f"Input text:\n{text.strip()}")
 print(f"Top {n} frequent words: {result}")
