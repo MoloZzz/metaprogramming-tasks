@@ -22,7 +22,7 @@
 Виконаю 2 з 7 вище описаних задач. Частина на C, Частина на Python
 
 ## first-method
-Функція (на С): на вхід – масив чисел, на вихід – його максимальна за довжиною зростаюча підпослідовність. 
+Функція (на С++): на вхід – масив чисел, на вихід – його максимальна за довжиною зростаюча підпослідовність. 
 Зв'язок з Python через pybind11
 ```
 pip install pybind11
@@ -53,4 +53,44 @@ copying build\lib.win-amd64-cpython-311\lis.cp311-win_amd64.pyd ->
 $ python test.py
 Input array: [10, 22, 9, 33, 21, 50, 41, 60, 80]
 Longest increasing subsequence: [10, 22, 33, 50, 60, 80]
+```
+
+## second-method
+Функція на С: на вхід – текст та число N, на вихід – словник (dict) з N найбільш вживаних слів у ньому разом з їх кількістю.
+Зв'язок через Cython
+
+second-method/
+│
+├── word_counter.c           ← C-файл з логікою (можна згенерувати окремо)
+├── word_counter.h           ← Заголовочний файл з деклараціями
+├── word_counter.pxd         ← PXD-файл для Cython (інтерфейс до C-функцій)
+├── word_counter.pyx         ← Python/Cython-файл, який викликає функції C
+├── setup.py                 ← Скрипт для компіляції Cython
+└── test_script.py           ← Python-скрипт для запуску та перевірки
+
+```
+$ python setup.py build_ext --inplace
+Compiling wordfreq.pyx because it changed.
+[1/1] Cythonizing wordfreq.pyx
+running build_ext
+building 'wordfreq' extension
+creating build
+creating build\temp.win-amd64-cpython-311
+creating build\temp.win-amd64-cpython-311\Release
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX86\x64\cl.exe" /c /nologo /O2 /W3 /GL /DNDEBUG /MD "-IC:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\include" "-IC:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\ATLMFC\include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" "-IC:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" /Tcwordfreq.c /Fobuild\temp.win-amd64-cpython-311\Release\wordfreq.obj
+wordfreq.c
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX86\x64\cl.exe" /c /nologo /O2 /W3 /GL /DNDEBUG /MD "-IC:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\include" "-IC:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\ATLMFC\include" "-IC:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include" "-IC:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" "-IC:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" /Tcwordfreq_core.c /Fobuild\temp.win-amd64-cpython-311\Release\wordfreq_core.obj
+wordfreq_core.c
+creating C:\Users\megao\Desktop\Projects\metaprogramming-tasks\python-interacts-with-c\second-method1\build\lib.win-amd64-cpython-311
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX86\x64\link.exe" /nologo /INCREMENTAL:NO /LTCG /DLL /MANIFEST:EMBED,ID=2 /MANIFESTUAC:NO "/LIBPATH:C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\libs" "/LIBPATH:C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0" "/LIBPATH:C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\PCbuild\amd64" "/LIBPATH:C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\ATLMFC\lib\x64" "/LIBPATH:C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\lib\x64" "/LIBPATH:C:\Program Files (x86)\Windows Kits\10\lib\10.0.26100.0\ucrt\x64" "/LIBPATH:C:\Program Files (x86)\Windows Kits\10\\lib\10.0.26100.0\\um\x64" /EXPORT:PyInit_wordfreq build\temp.win-amd64-cpython-311\Release\wordfreq.obj build\temp.win-amd64-cpython-311\Release\wordfreq_core.obj /OUT:build\lib.win-amd64-cpython-311\wordfreq.cp311-win_amd64.pyd /IMPLIB:build\temp.win-amd64-cpython-311\Release\wordfreq.cp311-win_amd64.lib
+   Creating library build\temp.win-amd64-cpython-311\Release\wordfreq.cp311-win_amd64.lib and object build\temp.win-amd64-cpython-311\Release\worordfreq.cp311-win_amd64.exp
+Generating code
+Finished generating code
+copying build\lib.win-amd64-cpython-311\wordfreq.cp311-win_amd64.pyd ->
+```
+```
+$ python example.py
+Input text: This is a sample text. This text contains some words.
+Some words are repeated in this sample text!
+Top 3 frequent words: {'text': 3, 'this': 3, 'sample': 2}
 ```
