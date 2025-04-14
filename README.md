@@ -94,3 +94,11 @@ Input text: This is a sample text. This text contains some words.
 Some words are repeated in this sample text!
 Top 3 frequent words: {'text': 3, 'this': 3, 'sample': 2}
 ```
+```
+$ python example.py
+Input text: This is a sample text. This text contains some words.
+Some words are repeated in this sample text!
+Some more text to test the word frequency.
+This is a test text to check the word frequency.
+Top 10 frequent words: {'text': 5, 'this': 4, 'some': 3, 'a': 2, 'frequency': 2, 'is': 2, 'sample': 2, 'test': 2, 'the': 2, 'to': 2}
+```
